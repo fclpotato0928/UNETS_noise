@@ -1,0 +1,20 @@
+dataset:
+  data_root: ${hydra:runtime.cwd}/data/breast_ultrasound
+  pin_memory: true
+  image_size: [512, 512]  # 원하는 크기로 조정
+
+training:
+  batch_size: 32
+  num_workers: 8
+  lr: 0.001
+  epochs: 100
+  ckpt_dir: ${hydra:runtime.cwd}/checkpoints
+
+evaluation:
+  batch_size: 64
+
+wandb:
+  project: breast-unet
+  entity: null
+  run_name: unet-baseline
+  enable: true
