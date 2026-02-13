@@ -1,0 +1,24 @@
+dataset:
+  name: retina
+  image_dir: ${hydra:runtime.cwd}/data/Retina/Data/train/image
+  mask_dir:  ${hydra:runtime.cwd}/data/Retina/Data/train/mask
+  pin_memory: true
+  image_size: [512, 512]
+
+training:
+  mode: finetune
+  batch_size: 32
+  num_workers: 8
+  lr: 5e-5
+  epochs: 100
+  ckpt_dir: ${hydra:runtime.cwd}/checkpoints
+  pretrained_path: ${hydra:runtime.cwd}/checkpoints/unet-transition/best_model.pth
+  freeze_encoder: false
+
+evaluation:
+  batch_size: 64
+
+wandb:
+  project: breast-unet
+  run_name: unetfull_finetune-retina-transition
+  enable: true

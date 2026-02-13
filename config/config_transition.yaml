@@ -1,0 +1,26 @@
+dataset:
+  data_root: ${hydra:runtime.cwd}/data/breast_ultrasound
+  pin_memory: true
+  image_size: [512, 512]  # 원하는 크기로 조정
+  label_smoothing_epsilon: 0.0
+
+training:
+  batch_size: 32
+  num_workers: 8
+  lr: 0.001
+  epochs: 100
+  ckpt_dir: ${hydra:runtime.cwd}/checkpoints
+  use_annealed_smoothing: true  # true로 설정하면 활성화
+  annealed_max_epochs: 100      # smoothing이 완전히 사라지는 에폭 (보통 총 epochs와 동일)
+  annealed_eps_start: 0.499     # 초기 smoothing 강도 (0.499 = 거의 최대)
+  annealed_eps_end: 0.0         # 최종 smoothing 강도 (0.0 = smoothing 없음)
+  annealed_mode: "cosine"  
+
+evaluation:
+  batch_size: 64
+
+wandb:
+  project: breast-unet
+  entity: null
+  run_name: unet-transition
+  enable: true
