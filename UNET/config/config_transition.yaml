@@ -1,5 +1,5 @@
 dataset:
-  data_root: ${hydra:runtime.cwd}/data/breast_ultrasound
+  data_root: ${hydra:runtime.cwd}/data/breast_ultrasound/Dataset_BUSI_with_GT
   pin_memory: true
   image_size: [512, 512]  # 원하는 크기로 조정
   label_smoothing_epsilon: 0.0
